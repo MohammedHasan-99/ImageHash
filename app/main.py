@@ -29,8 +29,8 @@ memcache = {}
 def connection():
     # Connect to database
     conn = pymysql.connect(host='localhost',
-                           user='root',
-                           password='',
+                           user='mohammed',
+                           password='mohammed',
                            database='hash_image')
     return conn
 
@@ -404,4 +404,4 @@ sql = "SELECT count(*) from statistics where created_at >= date_sub(now(), inter
 cursor.execute(sql)
 
 
-webapp.run('0.0.0.0',5000,debug=True)
+webapp.run('0.0.0.0',80,debug=True)
