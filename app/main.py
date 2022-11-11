@@ -4,8 +4,7 @@
 # from itertools import chain
 from dbm import dumb
 import random
-# import time
-# from tkinter.messagebox import NO
+conne# from tkinter.messagebox import NO
 # from unittest.mock import patch
 # from flask import render_template, url_for
 # from app import webapp, memcache
@@ -28,10 +27,10 @@ memcache = {}
 
 def connection():
     # Connect to database
-    conn = pymysql.connect(host='localhost',
-                           user='mohammed',
-                           password='mohammed',
-                           database='hash_image')
+    conn = pymysql.connect(host='imagehash.cjfl7rkzpymu.us-east-1.rds.amazonaws.com',
+                           user='admin',
+                           password='admin123456',
+                           database='imageHash')
     return conn
 
 
