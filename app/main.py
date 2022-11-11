@@ -281,7 +281,7 @@ def addImage():
         image = request.files["image"]
         print(f"static/hashedImages/{image.filename}")
 
-        image.save(f"app/static/hashedImages/{image.filename}")
+        image.save(f"static/hashedImages/{image.filename}")
         conn = connection()
         cursor = conn.cursor()
         
