@@ -78,7 +78,7 @@ class Cache:
                 row = cursor.fetchone()
 
                 hash = row[0]
-                path = f"app/static/hashedImages/{row[1]}"
+                path = f"static/hashedImages/{row[1]}"
 
                 print(path)
                 
