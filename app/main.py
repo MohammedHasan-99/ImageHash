@@ -4,7 +4,7 @@
 # from itertools import chain
 from dbm import dumb
 import random
-conne# from tkinter.messagebox import NO
+# from tkinter.messagebox import NO
 # from unittest.mock import patch
 # from flask import render_template, url_for
 # from app import webapp, memcache
