@@ -270,7 +270,19 @@ def config():
         return render_template("config.html", message="Cache set successfully")
     if request.method == 'GET':   
         return render_template("config.html")
-
+    
+    
+    
+@webapp.route('/pool-resize',methods=['GET'])
+def pool_resize():
+    return render_template("pool-resize.html")
+    
+    
+    
+    
+    
+    
+    
 @webapp.route('/list')
 def listItems():
     conn = connection()
