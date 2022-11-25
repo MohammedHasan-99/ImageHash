@@ -25,8 +25,8 @@ webapp = Flask(__name__)
 memcache = {}
 
 
-access_key_id = 0
-secret_access_key = 0
+access_key_id = 'AKIA2JSEFUFGQ32DTPM6'
+secret_access_key = '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'
 client = boto3.client('s3', aws_access_key_id=access_key_id, aws_secret_access_key=secret_access_key)
 bucket = 'imagehashcloudproject'
 
