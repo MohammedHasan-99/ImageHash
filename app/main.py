@@ -303,10 +303,10 @@ def increase():
     size = response["AutoScalingGroups"][0]['DesiredCapacity']
     print(size)
     if size == 8:
-        return render_template("pool-resize.html", size=size, message="Maximum number of instances has reached")
+        return render_template("pool-resize.html", size=size, message1="Maximum number of instances has reached")
     else :
         client.set_desired_capacity(AutoScalingGroupName='imageHashGroup', DesiredCapacity=size+1)
-
+        return render_template("pool-resize.html", size=size+1)
 
 @webapp.route('/decrease',methods=['POST'])
 def decrease():
@@ -320,9 +320,10 @@ def decrease():
     print(size)
     
     if size == 1:
-        return render_template("pool-resize.html", size=size, message="Minimum number of instances has reached")
+        return render_template("pool-resize.html", size=size, message2="Minimum number of instances has reached")
     else :
         client.set_desired_capacity(AutoScalingGroupName='imageHashGroup', DesiredCapacity=size-1)
+        return render_template("pool-resize.html", size=size-1)
 
     
     
