@@ -287,8 +287,8 @@ def config():
     
 @webapp.route('/pool-resize',methods=['GET'])
 def pool_resize():
-    size = client.get
-    return render_template("pool-resize.html", size=size)
+#     size = client.get
+    return render_template("pool-resize.html", size=2)
 
 # @webapp.route('/increase',methods=['POST'])
 # def increase():
