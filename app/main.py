@@ -15,7 +15,7 @@ import os
 import threading
 from collections import OrderedDict
 import base64
-
+import boto3
 
 
 
@@ -23,6 +23,13 @@ global memcache
 
 webapp = Flask(__name__)
 memcache = {}
+
+
+access_key_id = 0
+secret_access_key = 0
+client = boto3.client('s3', aws_access_key_id=access_key_id, aws_secret_access_key=secret_access_key)
+bucket = 'imagehashcloudproject'
+
 
 
 def connection():
@@ -79,10 +86,14 @@ class Cache:
 
                 hash = row[0]
                 path = f"static/hashedImages/{row[1]}"
-
-                print(path)
                 
-                return self.put(hash, path)
+                # Download image from s3
+                client.download_file(Bucket=bucket, Key=hash, Filename=path)
+                
+#                 print(path)
+                temp_ = self.put(hash, path)
+                os.remove(path)
+                return temp_
 
     def put(self, key: str, path: str) -> None:
         if key not in self.cache:
@@ -282,6 +293,10 @@ def addImage():
         print(f"static/hashedImages/{image.filename}")
 
         image.save(f"static/hashedImages/{image.filename}")
+        
+        # Upload to s3
+        client.upload_file(Filename=f"static/hashedImages/{image.filename}", Bucket=bucket, Key=id)
+        
         conn = connection()
         cursor = conn.cursor()
         
