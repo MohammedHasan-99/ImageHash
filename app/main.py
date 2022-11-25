@@ -287,7 +287,7 @@ def increase():
 
 
 @webapp.route('/decrease',methods=['POST'])
-def increase():
+def decrease():
     if size == 1:
         return render_template("pool-resize.html", message="Minimum number of instances has reached")
     else :
