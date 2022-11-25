@@ -34,6 +34,10 @@ bucket = 'imagehashcloudproject'
 
 client = boto3.client('autoscaling', aws_access_key_id=access_key_id, aws_secret_access_key=secret_access_key)
 
+
+
+
+
 def connection():
     # Connect to database
     conn = pymysql.connect(host='imagehash.cz0uhkdlsnct.us-east-1.rds.amazonaws.com',
@@ -249,6 +253,12 @@ cache = Cache()
 
 @webapp.route('/')
 def main():
+    response = client.describe_auto_scaling_groups(
+        AutoScalingGroupNames=[
+            'imageHashGroup',
+        ]
+    )
+    print(response["AutoScalingGroups"][0]['DesiredCapacity'])
     return render_template("main.html")
 
 
@@ -277,22 +287,25 @@ def config():
     
 @webapp.route('/pool-resize',methods=['GET'])
 def pool_resize():
-    return render_template("pool-resize.html")
+    size = client.get
+    return render_template("pool-resize.html", size=size)
 
 # @webapp.route('/increase',methods=['POST'])
 # def increase():
+#     size = client.get
 #     if size == 8:
-#         return render_template("pool-resize.html", message="Maximum number of instances has reached")
+#         return render_template("pool-resize.html", size=size, message="Maximum number of instances has reached")
 #     else :
-        
+#         client.set_desired_capacity(AutoScalingGroupName='imageHashGroup', DesiredCapacity=size+1)
 
 
 # @webapp.route('/decrease',methods=['POST'])
 # def decrease():
+#     size = client.get
 #     if size == 1:
-#         return render_template("pool-resize.html", message="Minimum number of instances has reached")
+#         return render_template("pool-resize.html", size=size, message="Minimum number of instances has reached")
 #     else :
-        
+#         client.set_desired_capacity(AutoScalingGroupName='imageHashGroup', DesiredCapacity=size-1)
 
     
     
@@ -303,6 +316,7 @@ def pool_resize():
     
 @webapp.route('/list')
 def listItems():
+    
     conn = connection()
     cursor = conn.cursor()
         
