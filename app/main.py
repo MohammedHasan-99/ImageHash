@@ -253,12 +253,6 @@ cache = Cache()
 
 @webapp.route('/')
 def main():
-    response = client.describe_auto_scaling_groups(
-        AutoScalingGroupNames=[
-            'imageHashGroup',
-        ]
-    )
-    print(response["AutoScalingGroups"][0]['DesiredCapacity'])
     return render_template("main.html")
 
 
@@ -287,25 +281,48 @@ def config():
     
 @webapp.route('/pool-resize',methods=['GET'])
 def pool_resize():
-#     size = client.get
-    return render_template("pool-resize.html", size=2)
+    response = client.describe_auto_scaling_groups(
+        AutoScalingGroupNames=[
+            'imageHashGroup',
+        ]
+    )
+   
+    size = response["AutoScalingGroups"][0]['DesiredCapacity']
+    print(size)
+    
+    return render_template("pool-resize.html", size=size)
 
-# @webapp.route('/increase',methods=['POST'])
-# def increase():
-#     size = client.get
-#     if size == 8:
-#         return render_template("pool-resize.html", size=size, message="Maximum number of instances has reached")
-#     else :
-#         client.set_desired_capacity(AutoScalingGroupName='imageHashGroup', DesiredCapacity=size+1)
+@webapp.route('/increase',methods=['POST'])
+def increase():
+    response = client.describe_auto_scaling_groups(
+        AutoScalingGroupNames=[
+            'imageHashGroup',
+        ]
+    )
+   
+    size = response["AutoScalingGroups"][0]['DesiredCapacity']
+    print(size)
+    if size == 8:
+        return render_template("pool-resize.html", size=size, message="Maximum number of instances has reached")
+    else :
+        client.set_desired_capacity(AutoScalingGroupName='imageHashGroup', DesiredCapacity=size+1)
 
 
-# @webapp.route('/decrease',methods=['POST'])
-# def decrease():
-#     size = client.get
-#     if size == 1:
-#         return render_template("pool-resize.html", size=size, message="Minimum number of instances has reached")
-#     else :
-#         client.set_desired_capacity(AutoScalingGroupName='imageHashGroup', DesiredCapacity=size-1)
+@webapp.route('/decrease',methods=['POST'])
+def decrease():
+    response = client.describe_auto_scaling_groups(
+        AutoScalingGroupNames=[
+            'imageHashGroup',
+        ]
+    )
+   
+    size = response["AutoScalingGroups"][0]['DesiredCapacity']
+    print(size)
+    
+    if size == 1:
+        return render_template("pool-resize.html", size=size, message="Minimum number of instances has reached")
+    else :
+        client.set_desired_capacity(AutoScalingGroupName='imageHashGroup', DesiredCapacity=size-1)
 
     
     
