@@ -111,7 +111,7 @@
                 </form>
               
                 <!-- Button trigger modal -->
-                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                <button type="button" class="btn btn-primary  modal-btn" data-bs-toggle="modal" data-bs-target="#exampleModal">
                     Launch demo modal
                 </button>
   
@@ -127,8 +127,10 @@
                             <div class="tab">
                                 <button class="tablinks" onclick="openCity(event, 'Miss')">Miss Rate</button>
                                 <button class="tablinks" onclick="openCity(event, 'Hit')">Hit Rate</button>
-                                <button class="tablinks" onclick="openCity(event, 'Size')">Size</button>
-                                <button class="tablinks" onclick="openCity(event, 'FreeSpace')">Free Space</button>
+                                <button class="tablinks" onclick="openCity(event, 'Workers')">Number of Workers</button>
+                                <button class="tablinks" onclick="openCity(event, 'Items')">Number of Items</button>
+                                <button class="tablinks" onclick="openCity(event, 'ItemsCache')">Number of Items in Cache</button>
+                                <button class="tablinks" onclick="openCity(event, 'Requests')">Number of Requests</button>
 
                             </div>
                             
@@ -143,23 +145,34 @@
                 
                             </div>
                             
-                            <div id="Size" class="tabcontent" style="display: none">
+                            <div id="Workers" class="tabcontent" style="display: none">
                                 <h3>Size</h3>
-                                <canvas id="myChart-Size" style="width:100%;max-width:600px"></canvas>
+                                <canvas id="myChart-Workers" style="width:100%;max-width:600px"></canvas>
 
                             </div>
 
-                            <div id="FreeSpace" class="tabcontent" style="display: none">
+                            <div id="Items" class="tabcontent" style="display: none">
                                 <h3>Free Space</h3>
-                                <canvas id="myChart-FreeSpace" style="width:100%;max-width:600px"></canvas>
+                                <canvas id="myChart-Items" style="width:100%;max-width:600px"></canvas>
 
                             </div>
 
+                            <div id="ItemsCache" class="tabcontent" style="display: none">
+                                <h3>Free Space</h3>
+                                <canvas id="myChart-Items" style="width:100%;max-width:600px"></canvas>
+
+                            </div>
+                            
+                            <div id="Requests" class="tabcontent" style="display: none">
+                                <h3>Free Space</h3>
+                                <canvas id="myChart-Items" style="width:100%;max-width:600px"></canvas>
+
+                            </div>
 
                         
                         </div>
                         <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-secondary modal-btn" data-bs-dismiss="modal">Close</button>
                         
                         </div>
                     </div>
@@ -227,7 +240,7 @@
         });
 
 
-        new Chart("myChart-Size", {
+        new Chart("myChart-Workers", {
           type: "line",
           data: {
             labels: xValues,
@@ -243,7 +256,7 @@
         });
 
 
-        new Chart("myChart-FreeSpace", {
+        new Chart("myChart-Items", {
           type: "line",
           data: {
             labels: xValues,
