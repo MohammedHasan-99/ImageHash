@@ -26,7 +26,7 @@ memcache = {}
 
 
 
-s3 = boto3.resource('s3')
+s3 = boto3.client('s3')
 bucket = 'imagehashcloudproject'
 
 # client = boto3.client('s3', aws_access_key_id=access_key_id, aws_secret_access_key=secret_access_key)
