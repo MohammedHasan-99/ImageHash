@@ -25,11 +25,12 @@ webapp = Flask(__name__)
 memcache = {}
 
 
-access_key_id = ''
-secret_access_key = ''
-client = boto3.client('s3', aws_access_key_id=access_key_id, aws_secret_access_key=secret_access_key)
+
+s3 = boto3.resource('s3')
 bucket = 'imagehashcloudproject'
 
+# client = boto3.client('s3', aws_access_key_id=access_key_id, aws_secret_access_key=secret_access_key)
+# bucket = 'imagehashcloudproject'
 
 
 def connection():
@@ -88,7 +89,7 @@ class Cache:
                 path = f"static/hashedImages/{row[1]}"
                 
                 # Download image from s3
-                client.download_file(Bucket=bucket, Key=hash, Filename=path)
+                s3.download_file(Bucket=bucket, Key=hash, Filename=path)
                 
 #                 print(path)
                 temp_ = self.put(hash, path)
@@ -276,6 +277,22 @@ def config():
 @webapp.route('/pool-resize',methods=['GET'])
 def pool_resize():
     return render_template("pool-resize.html")
+
+@webapp.route('/increase',methods=['POST'])
+def increase():
+    if size == 8:
+        return render_template("pool-resize.html", message="Maximum number of instances has reached")
+    else :
+        
+
+
+@webapp.route('/decrease',methods=['POST'])
+def increase():
+    if size == 1:
+        return render_template("pool-resize.html", message="Minimum number of instances has reached")
+    else :
+        
+
     
     
     
@@ -307,7 +324,7 @@ def addImage():
         image.save(f"static/hashedImages/{image.filename}")
         
         # Upload to s3
-        client.upload_file(Filename=f"static/hashedImages/{image.filename}", Bucket=bucket, Key=id)
+        s3.upload_file(Filename=f"static/hashedImages/{image.filename}", Bucket=bucket, Key=id)
         
         conn = connection()
         cursor = conn.cursor()
