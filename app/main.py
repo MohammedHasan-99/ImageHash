@@ -278,19 +278,19 @@ def config():
 def pool_resize():
     return render_template("pool-resize.html")
 
-@webapp.route('/increase',methods=['POST'])
-def increase():
-    if size == 8:
-        return render_template("pool-resize.html", message="Maximum number of instances has reached")
-    else :
+# @webapp.route('/increase',methods=['POST'])
+# def increase():
+#     if size == 8:
+#         return render_template("pool-resize.html", message="Maximum number of instances has reached")
+#     else :
         
 
 
-@webapp.route('/decrease',methods=['POST'])
-def decrease():
-    if size == 1:
-        return render_template("pool-resize.html", message="Minimum number of instances has reached")
-    else :
+# @webapp.route('/decrease',methods=['POST'])
+# def decrease():
+#     if size == 1:
+#         return render_template("pool-resize.html", message="Minimum number of instances has reached")
+#     else :
         
 
     
