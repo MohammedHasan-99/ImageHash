@@ -125,12 +125,12 @@
                         </div>
                         <div class="modal-body">
                             <div class="tab">
-                                <button class="tablinks" onclick="openCity(event, 'Miss')">Miss Rate</button>
-                                <button class="tablinks" onclick="openCity(event, 'Hit')">Hit Rate</button>
-                                <button class="tablinks" onclick="openCity(event, 'Workers')">Number of Workers</button>
-                                <button class="tablinks" onclick="openCity(event, 'Items')">Number of Items</button>
-                                <button class="tablinks" onclick="openCity(event, 'ItemsCache')">Number of Items in Cache</button>
-                                <button class="tablinks" onclick="openCity(event, 'Requests')">Number of Requests</button>
+                                <button class="tablinks modal-btn my-2" onclick="openCity(event, 'Miss')">Miss Rate</button>
+                                <button class="tablinks modal-btn my-2" onclick="openCity(event, 'Hit')">Hit Rate</button>
+                                <button class="tablinks modal-btn my-2" onclick="openCity(event, 'Workers')">Number of Workers</button>
+                                <button class="tablinks modal-btn my-2" onclick="openCity(event, 'Items')">Number of Items</button>
+                                <button class="tablinks modal-btn my-2" onclick="openCity(event, 'ItemsCache')">Number of Items in Cache</button>
+                                <button class="tablinks modal-btn my-2" onclick="openCity(event, 'Requests')">Number of Requests</button>
 
                             </div>
                             
@@ -159,13 +159,13 @@
 
                             <div id="ItemsCache" class="tabcontent" style="display: none">
                                 <h3>Free Space</h3>
-                                <canvas id="myChart-Items" style="width:100%;max-width:600px"></canvas>
+                                <canvas id="myChart-ItemsCache" style="width:100%;max-width:600px"></canvas>
 
                             </div>
                             
                             <div id="Requests" class="tabcontent" style="display: none">
                                 <h3>Free Space</h3>
-                                <canvas id="myChart-Items" style="width:100%;max-width:600px"></canvas>
+                                <canvas id="myChart-Requests" style="width:100%;max-width:600px"></canvas>
 
                             </div>
 
@@ -257,6 +257,36 @@
 
 
         new Chart("myChart-Items", {
+          type: "line",
+          data: {
+            labels: xValues,
+            datasets: [{ 
+              data: [50,60,25,44,55,66,99,88,22,11,55,66,44,88,99,77,33,55,66,44,11,22,55,44,66,99,55,44,77,88],
+              borderColor: "green",
+              fill: false
+            }]
+          },
+          options: {
+            legend: {display: false}
+          }
+        });
+        
+        new Chart("myChart-ItemsCache", {
+          type: "line",
+          data: {
+            labels: xValues,
+            datasets: [{ 
+              data: [50,60,25,44,55,66,99,88,22,11,55,66,44,88,99,77,33,55,66,44,11,22,55,44,66,99,55,44,77,88],
+              borderColor: "green",
+              fill: false
+            }]
+          },
+          options: {
+            legend: {display: false}
+          }
+        });
+        
+        new Chart("myChart-Requests", {
           type: "line",
           data: {
             labels: xValues,
