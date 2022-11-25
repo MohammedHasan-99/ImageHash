@@ -27,7 +27,7 @@ memcache = {}
 
 def connection():
     # Connect to database
-    conn = pymysql.connect(host='imagehash.cjfl7rkzpymu.us-east-1.rds.amazonaws.com',
+    conn = pymysql.connect(host='imagehash.cz0uhkdlsnct.us-east-1.rds.amazonaws.com',
                            user='admin',
                            password='admin123456',
                            database='imageHash')
